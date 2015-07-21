@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <title>JSON analyser</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<div id="container">
+  <div id="files">
+    <select name="file" id="select_file">
+      <option selected>Please select</option>
+      <% files.forEach(function(file) { %>
+        <option value="<%= file %>"><%= file %></option>
+      <% }); %>
+    </select>
+  </div>
+  <div id="view"></div>
+</div>
+
+<script src="jspm_packages/system.js" charset="utf-8"></script>
+<script src="config.js" charset="utf-8"></script>
+<script type="text/javascript">
+  System.import("src/main");
+</script>
+</body>
+</html>
