@@ -16,6 +16,7 @@ Then clone this repo, cd to it and install all dependencies by running:
 
 ```
 npm install
+jspm install
 ```
 
 ## Usage
