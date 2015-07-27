@@ -5,7 +5,7 @@ import Parser from "./parser";
 
 program
   .usage("[options] <url>")
-  .option("-l --limit <limit>", "Maximum number of packages to parse", 100)
+  .option("-l --limit <limit>", "Maximum number of packages to parse", parseInt)
   .parse(process.argv);
 
 let siteURL = program.args[0];
