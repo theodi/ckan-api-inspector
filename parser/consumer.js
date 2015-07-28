@@ -16,7 +16,14 @@ export default class Consumer {
     if (_.isArray(contents)) {
       assignDefault(context, "list", {});
       occurred(context.list);
-      _.each(contents, (value) => {
+      // all objects in an array that contain a key and value
+      // are transformed and processed as keys
+      let [keys, list] = _.partition(contents, hasKeyValue);
+      if (keys.length) {
+        let object = _.object(_.pluck(keys, "key"), keys);
+        this.populate(context, object);
+      }
+      _.each(list, (value) => {
         this.populate(context.list, value);
       });
     } else if (_.isObject(contents)) {
@@ -56,6 +63,12 @@ export default class Consumer {
       result: this.contents
     };
   }
+}
+
+function hasKeyValue(obj) {
+  return _.isObject(obj) &&
+         _.has(obj, "key") &&
+         _.has(obj, "value");
 }
 
 function assignDefault(obj, key, value) {
