@@ -37,6 +37,7 @@ ul {
 
 li {
   position: relative;
+  border-left: 1px dotted #ddd;
 }
 
 .content {
