@@ -21,4 +21,6 @@ parser.parseAll().then(json => {
   let fileName = url.parse(siteURL).hostname.replace(/\./g, "_") + ".json";
   console.log(`Storing results in output/${fileName}`.bold);
   fs.writeFileSync(`output/${fileName}`, JSON.stringify(json));
+}, error => {
+  console.error(error);
 });

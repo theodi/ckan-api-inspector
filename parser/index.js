@@ -1,4 +1,5 @@
 import "colors";
+import Q from "q";
 import _ from "lodash";
 import Consumer from "./consumer";
 import getJSON from "./getJSON";
@@ -7,8 +8,9 @@ export default class Parser {
 
   constructor({ url, limit }) {
     this.url = url;
-    this.processed = 0;
     this.limit = limit;
+    this.retries = 0;
+    this.processed = 0;
     this.consumer = new Consumer();
     this.getUntilComplete = this.getUntilComplete.bind(this);
   }
@@ -20,7 +22,17 @@ export default class Parser {
       if (!json.success) {
         throw new Error(`Search was unsuccessful for ${URL}`);
       }
+      this.retries = 0;
       return json.result;
+    }, error => {
+      if (this.retries < 10) {
+        this.retries += 1;
+        console.error(error);
+        console.log("Retrying in 5 seconds...");
+        return Q.delay(5000).then(() => this.getResult(start, count));
+      } else {
+        throw error;
+      }
     });
   }
 
