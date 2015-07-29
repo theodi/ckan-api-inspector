@@ -1,8 +1,8 @@
 # CKAN API Inspector
 
-![Screenshot](https://cloud.githubusercontent.com/assets/1308115/8802449/68c1025e-2fb9-11e5-9f8c-52e8916814e5.png)
+[![Screenshot](https://cloud.githubusercontent.com/assets/1308115/8802449/68c1025e-2fb9-11e5-9f8c-52e8916814e5.png)](http://theodi.github.io/ckan-api-inspector)
 
-This messy thing parses packages from a given CKAN site URL and records all metadata fields that appear (and some of their values).
+This messy thing parses packages from a given CKAN site URL and records all metadata fields that appear (and some of their values). **[Demo](http://theodi.github.io/ckan-api-inspector)**.
 
 ## Setting up
 
@@ -56,3 +56,5 @@ http-server
 Whenever a site is parsed, the script automatically updates `index.html` to include the parsed file. If you want to edit the HTML, edit `views/index.ejs` and then run `babel-node parse` without supplying a URL to generate a new `index.html` file.
 
 Local JavaScript is automatically used, falling back to the prebuilt `build.js` if the local is not available. So editing JavaScript should Just Work™, but you will need to run `jspm bundle-sfx src/main` when you want to update Github Pages.
+
+To deploy on `gh-pages` run: `git subtree push --prefix public origin gh-pages`
