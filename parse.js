@@ -24,15 +24,17 @@ if (siteURL) {
     let fileName = url.parse(siteURL).hostname.replace(/\./g, "_") + ".json";
     console.log(`Storing results in public/output/${fileName}`.bold);
     fs.writeFileSync(`public/output/${fileName}`, JSON.stringify(json));
+    rebuild();
   }, error => {
     console.error(error);
   });
+} else {
+  rebuild();
 }
 
-console.log("Rebuilding index.html...");
-rebuild();
 
 function rebuild() {
+  console.log("Rebuilding index.html...");
   let template = fs.readFileSync("views/index.ejs").toString();
   fs.readdir("public/output", function(error, files) {
     fs.writeFileSync("public/index.html", ejs.render(template, { files }, {}));
