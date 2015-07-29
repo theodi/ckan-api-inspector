@@ -68,7 +68,7 @@ $("#select_file").on("change", function() {
               .data(_.sortBy(pullKeys(data.keys), "key"))
             .enter()
               .append("li")
-              .classed("expandable", d => d.keys != null);
+              .classed("expandable", d => d.keys != null || d.list != null);
 
           keys.append("div")
               .attr("class", "content")
