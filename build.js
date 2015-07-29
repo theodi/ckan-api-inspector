@@ -22686,7 +22686,7 @@ System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.
                 });
 
                 keys.append("div").attr("class", "content").text(function (d) {
-                  return d.key;
+                  return JSON.stringify(d.key);
                 }).append("div").attr("class", "occurs").text(function (d) {
                   return percent(d.occurs / total);
                 }).style("width", function (d) {

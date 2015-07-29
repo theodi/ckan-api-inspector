@@ -68,11 +68,11 @@ $("#select_file").on("change", function() {
               .data(_.sortBy(pullKeys(data.keys), "key"))
             .enter()
               .append("li")
-              .classed("expandable", d => d.keys != null)
+              .classed("expandable", d => d.keys != null);
 
           keys.append("div")
               .attr("class", "content")
-              .text(d => d.key)
+              .text(d => JSON.stringify(d.key))
             .append("div")
               .attr("class", "occurs")
               .text(d => percent(d.occurs / total))
