@@ -1,5 +1,6 @@
 import fs from "fs";
 import url from "url";
+import ejs from "ejs";
 import program from "commander";
 import Parser from "./parser";
 
@@ -11,16 +12,29 @@ program
 let siteURL = program.args[0];
 let limit = program.limit;
 
-if (!/https?:\/\//.test(siteURL)) {
-  siteURL = "http://" + siteURL;
+if (siteURL) {
+
+  if (!/https?:\/\//.test(siteURL)) {
+    siteURL = "http://" + siteURL;
+  }
+
+  let parser = new Parser({ url: siteURL, limit });
+
+  parser.parseAll().then(json => {
+    let fileName = url.parse(siteURL).hostname.replace(/\./g, "_") + ".json";
+    console.log(`Storing results in public/output/${fileName}`.bold);
+    fs.writeFileSync(`public/output/${fileName}`, JSON.stringify(json));
+  }, error => {
+    console.error(error);
+  });
 }
 
-let parser = new Parser({ url: siteURL, limit });
+console.log("Rebuilding index.html...");
+rebuild();
 
-parser.parseAll().then(json => {
-  let fileName = url.parse(siteURL).hostname.replace(/\./g, "_") + ".json";
-  console.log(`Storing results in output/${fileName}`.bold);
-  fs.writeFileSync(`output/${fileName}`, JSON.stringify(json));
-}, error => {
-  console.error(error);
-});
+function rebuild() {
+  let template = fs.readFileSync("views/index.ejs").toString();
+  fs.readdir("public/output", function(error, files) {
+    fs.writeFileSync("public/index.html", ejs.render(template, { files }, {}));
+  });
+}

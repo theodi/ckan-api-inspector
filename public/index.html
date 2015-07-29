@@ -11,9 +11,17 @@
   <div id="files">
     <select name="file" id="select_file">
       <option selected>Please select</option>
-      <% files.forEach(function(file) { %>
-        <option value="<%= file %>"><%= file %></option>
-      <% }); %>
+      
+        <option value="catalog_data_gov.json">catalog_data_gov.json</option>
+      
+        <option value="data_bris_ac_uk.json">data_bris_ac_uk.json</option>
+      
+        <option value="data_gov_uk.json">data_gov_uk.json</option>
+      
+        <option value="data_london_gov_uk.json">data_london_gov_uk.json</option>
+      
+        <option value="datahub_io.json">datahub_io.json</option>
+      
     </select>
   </div>
   <div id="view"></div>

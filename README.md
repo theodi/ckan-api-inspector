@@ -39,10 +39,20 @@ babel-node parse data.gov.uk -l 1000
 
 ### Inspecting
 
-To view the results after it's done parsing, start the server:
+To view the results after it's done parsing, start a local server in the `public` directory. You can do this by installing http-server:
 
 ```
-babel-node serve
+npm install -g http-server
 ```
 
-Then open [http://localhost:8000](http://localhost:8000). Select a result from the dropdown and then click around.
+Then cd to the `public` directory and run:
+
+```
+http-server
+```
+
+## How it works
+
+Whenever a site is parsed, the script automatically updates `index.html` to include the parsed file. If you want to edit the HTML, edit `views/index.ejs` and then run `babel-node parse` without supplying a URL to generate a new `index.html` file.
+
+Local JavaScript is automatically used, falling back to the prebuilt `build.js` if the local is not available. So editing JavaScript should Just Work™, but you will need to run `jspm bundle-sfx src/main` when you want to update Github Pages.
