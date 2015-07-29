@@ -22682,7 +22682,7 @@ System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.
 
               if (data.keys) {
                 var keys = root.append("ul").attr("class", "keys").selectAll("li").data(_.sortBy(pullKeys(data.keys), "key")).enter().append("li").classed("expandable", function (d) {
-                  return d.keys != null;
+                  return d.keys != null || d.list != null;
                 });
 
                 keys.append("div").attr("class", "content").text(function (d) {
