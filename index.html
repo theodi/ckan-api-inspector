@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <title>JSON analyser</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<div id="container">
+  <div id="files">
+    <select name="file" id="select_file">
+      <option selected>Please select</option>
+      
+        <option value="catalog_data_gov.json">catalog_data_gov.json</option>
+      
+        <option value="data_bris_ac_uk.json">data_bris_ac_uk.json</option>
+      
+        <option value="data_gov_uk.json">data_gov_uk.json</option>
+      
+        <option value="data_london_gov_uk.json">data_london_gov_uk.json</option>
+      
+        <option value="datahub_io.json">datahub_io.json</option>
+      
+    </select>
+  </div>
+  <div id="view"></div>
+</div>
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script>
+
+if (window.System) {
+  System.import('src/main');
+} else {
+  document.write("<script src='build.js'><\/script>");
+}
+
+</script>
+</body>
+</html>
