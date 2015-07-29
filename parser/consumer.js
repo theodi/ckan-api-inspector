@@ -33,23 +33,24 @@ export default class Consumer {
         occurred(context.keys[key]);
         this.populate(context.keys[key], value);
       });
-    } else if (!context.too_many_values) {
+    } else {
       assignDefault(context, "values", []);
-      if (context.values.length > 50) {
-        context.too_many_values = true;
-      } else {
-        this.populateValue(context.values, contents);
-      }
+      this.populateValue(context, contents);
     }
   }
 
-  populateValue(values, value) {
-    let result = _.findWhere(values, { value });
-    if (!result) {
+  populateValue(context, value) {
+    let result = _.findWhere(context.values, { value });
+    if (!result && !context.too_many_values) {
       result = { value };
-      values.push(result);
+      context.values.push(result);
     }
-    return occurred(result);
+    if (result) {
+      occurred(result);
+    }
+    if (context.values.length > 50) {
+      context.too_many_values = true;
+    }
   }
 
   consume(contents) {
