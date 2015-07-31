@@ -2,10 +2,11 @@ import http from "http";
 import request from "request";
 
 let pool = new http.Agent({ maxSockets: 10 });
+let headers = { "User-Agent": "ckan-api-inspector-bot" };
 
 export default function(href) {
   return new Promise(function(resolve, reject) {
-    request({ uri: href, pool: pool }, function(error, response) {
+    request({ uri: href, headers, pool }, function(error, response) {
 
       if (error) return reject(error);
 
