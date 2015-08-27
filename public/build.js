@@ -22618,7 +22618,7 @@ System.register("npm:lodash@3.10.0", ["npm:lodash@3.10.0/index"], true, function
 System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.0", "github:mbostock/d3@3.5.6"], function (_export) {
   "use strict";
 
-  var $, _, d3, percent;
+  var $, _, d3, percent, percent4dp;
 
   function pullKeys(obj) {
     return _.map(obj, function (value, key) {
@@ -22642,6 +22642,7 @@ System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.
       });
 
       percent = d3.format(".0%");
+      percent4dp = d3.format(".4%");
 
       $("#select_file").on("change", function () {
         var filename = $(this).val();
@@ -22668,7 +22669,7 @@ System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.
                 }).append("div").attr("class", "occurs").text(function (d) {
                   return percent(d.occurs / total);
                 }).style("width", function (d) {
-                  return percent(d.occurs / total);
+                  return percent4dp(d.occurs / total);
                 });
 
                 if (data.too_many_values) {
@@ -22690,7 +22691,7 @@ System.register("src/main", ["github:components/jquery@2.1.4", "npm:lodash@3.10.
                 }).append("div").attr("class", "occurs").text(function (d) {
                   return percent(d.occurs / total);
                 }).style("width", function (d) {
-                  return percent(d.occurs / total);
+                  return percent4dp(d.occurs / total);
                 });
 
                 keys.call(buildTree);

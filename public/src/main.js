@@ -8,6 +8,7 @@ $("#view").on("click", "li", function() {
 });
 
 let percent = d3.format(".0%");
+let percent4dp = d3.format(".4%");
 
 $("#select_file").on("change", function() {
   let filename = $(this).val();
@@ -43,7 +44,7 @@ $("#select_file").on("change", function() {
               .append("div")
                 .attr("class", "occurs")
                 .text(d => percent(d.occurs / total))
-                .style("width", d => percent(d.occurs / total));
+                .style("width", d => percent4dp(d.occurs / total));
 
           if (data.too_many_values) {
             container.append("li")
@@ -76,7 +77,7 @@ $("#select_file").on("change", function() {
             .append("div")
               .attr("class", "occurs")
               .text(d => percent(d.occurs / total))
-              .style("width", d => percent(d.occurs / total));
+              .style("width", d => percent4dp(d.occurs / total));
 
           keys.call(buildTree);
         }
